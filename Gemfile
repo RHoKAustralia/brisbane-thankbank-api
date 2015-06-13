@@ -12,6 +12,7 @@ gem 'bootstrap-sass'
 gem 'bootstrap-sass-extras'
 gem 'devise'
 gem 'rails_admin'
+gem 'simple_form'
 
 group :production do
   gem 'unicorn'

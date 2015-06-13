@@ -16,7 +16,7 @@ gem 'devise'
 gem 'rails_admin'
 gem 'simple_form'
 gem 'paperclip'
-gem 'aws-sdk'
+gem 'aws-sdk', '< 2.0'
 
 group :production do
   gem 'unicorn'

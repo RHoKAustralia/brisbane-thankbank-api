@@ -15,6 +15,7 @@ gem 'bootstrap-sass-extras'
 gem 'devise'
 gem 'rails_admin'
 gem 'simple_form'
+gem 'paperclip'
 
 group :production do
   gem 'unicorn'

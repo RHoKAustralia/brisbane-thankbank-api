@@ -4,4 +4,5 @@ class CouponCategory < ActiveRecord::Base
   validates :quantity, presence: true, length: { minimum: 1 }
 
   belongs_to :partner
+  has_many :coupons
 end

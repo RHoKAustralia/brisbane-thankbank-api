@@ -12,5 +12,6 @@ RSpec.describe CouponCategory, type: :model do
 
   context 'Associations' do
     it { is_expected.to belong_to(:partner) }
+    it { is_expected.to have_many(:coupons) }
   end
 end

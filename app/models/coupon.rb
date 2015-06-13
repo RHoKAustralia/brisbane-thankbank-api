@@ -7,6 +7,12 @@ class Coupon < ActiveRecord::Base
 
   before_validation :generate_unique_token
 
+  rails_admin do
+    edit do
+      exclude_fields :token
+    end
+  end
+
   private
 
   def generate_unique_token

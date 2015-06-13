@@ -16,6 +16,6 @@ class Coupon < ActiveRecord::Base
   private
 
   def generate_unique_token
-    Digest::SHA1.hexdigest([Time.now, self.attributes.to_s].join) unless self.token.present?
+    self.token = Digest::SHA1.hexdigest([Time.now, self.attributes.to_s].join) unless self.token.present?
   end
 end

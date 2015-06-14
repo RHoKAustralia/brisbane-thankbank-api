@@ -20,7 +20,7 @@ class Api::V1::UsersController < Api::BaseController
   def user_attributes
     new_params = params.require(:user).permit(:email, :facebook_uid, :first_name, :last_name)
 
-    if params[:avatar_url].present?
+    if params[:user].present? && params[:user][:avatar_url].present?
       new_params[:avatar] = open(params[:avatar_url])
     end
 

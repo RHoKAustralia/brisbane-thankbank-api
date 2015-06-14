@@ -18,7 +18,16 @@ class Api::V1::CheckinsController < Api::BaseController
   end
 
   def image
-    @image ||= params[:image]
+    @image ||= begin
+      if params[:image].present?
+        decoded_file = Base64.decode64(params[:image])
+        file = Tempfile.new(['image-', Random.rand(1000).to_s, '.jpg'].join)
+        file.binmode
+        file.write decoded_file
+        file.close
+        file
+      end
+    end
   end
 
   def coupon

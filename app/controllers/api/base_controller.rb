@@ -13,7 +13,7 @@ class Api::BaseController < ActionController::Base
   end
 
   def sign_in_user
-    user = User.find_by(facebook_uid: user_attributes[:uid])
+    user = User.find_by(facebook_uid: user_attributes[:facebook_uid])
     if user
       sign_in(user, bypass: true)
     else
@@ -23,6 +23,8 @@ class Api::BaseController < ActionController::Base
   end
 
   def user_attributes
-    params.require(:user).permit(:uid)
+    {
+      facebook_uid: params[:facebook_uid]
+    }
   end
 end

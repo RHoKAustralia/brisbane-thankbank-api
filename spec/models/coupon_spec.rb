@@ -4,7 +4,6 @@ RSpec.describe Coupon, type: :model do
   context 'Validations' do
     it { is_expected.to validate_presence_of(:coupon_category_id) }
     it { is_expected.to validate_presence_of(:user_id) }
-    it { is_expected.to validate_presence_of(:token) }
     it { is_expected.to validate_uniqueness_of(:token) }
   end
 

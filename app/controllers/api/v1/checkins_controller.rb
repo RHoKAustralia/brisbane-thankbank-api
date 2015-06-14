@@ -29,7 +29,7 @@ class Api::V1::CheckinsController < Api::BaseController
   end
 
   def coupon
-    @coupon ||= Coupon.create(partner: partner, user_id: current_user.id)
+    @coupon ||= Coupon.create(partner: partner, user_id: current_user.id, name: params[:coupon][:name])
   end
 end
 

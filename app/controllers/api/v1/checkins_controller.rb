@@ -1,6 +1,6 @@
 class Api::V1::CheckinsController < Api::BaseController
   def create
-    checkin = Checkin.new(user: current_user, coupon: coupon)
+    checkin = Checkin.new(user: current_user, coupon: coupon, image: image)
 
     if checkin.save
       render json: { checkin: { id: checkin.id }, code: 200 }.to_json, status: :ok
@@ -18,14 +18,7 @@ class Api::V1::CheckinsController < Api::BaseController
   end
 
   def image
-    # @image ||= begin
-    #  if params[:image].present?
-    #
-    #  else
-    #
-    #  end
-   # end
-
+    @image ||= params[:image]
   end
 
   def coupon

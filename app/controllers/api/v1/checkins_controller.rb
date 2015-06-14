@@ -1,6 +1,6 @@
 class Api::V1::CheckinsController < Api::BaseController
   def create
-    checkin = Checkin.new(user: current_user, coupon: coupon, image: image)
+    checkin = Checkin.new(user: current_user, coupon: coupon)
     if params[:image].present?
       StringIO.open(Base64.decode64(params[:image])) do |data|
         data.class.class_eval { attr_accessor :original_filename, :content_type }

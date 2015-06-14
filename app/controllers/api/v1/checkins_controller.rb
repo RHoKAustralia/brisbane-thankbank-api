@@ -1,6 +1,14 @@
 class Api::V1::CheckinsController < Api::BaseController
   def create
     checkin = Checkin.new(user: current_user, coupon: coupon, image: image)
+    if params[:image].present?
+      StringIO.open(Base64.decode64(params[:image])) do |data|
+        data.class.class_eval { attr_accessor :original_filename, :content_type }
+        data.original_filename = "file-#{Random.rand(123321)}.jpg"
+        data.content_type = "image/jpeg"
+        checkin.image = data
+      end
+    end
 
     if checkin.save
       render json: { checkin: { id: checkin.id }, code: 200 }.to_json, status: :ok
@@ -14,19 +22,6 @@ class Api::V1::CheckinsController < Api::BaseController
   def partner
     @partner ||= begin
       Partner.find_or_create_by(name: params[:coupon][:partner][:name])
-    end
-  end
-
-  def image
-    @image ||= begin
-      if params[:image].present?
-        decoded_file = Base64.decode64(params[:image])
-        file = Tempfile.new(['image-', Random.rand(1000).to_s, '.jpg'].join)
-        file.binmode
-        file.write decoded_file
-        file.close
-        file
-      end
     end
   end
 

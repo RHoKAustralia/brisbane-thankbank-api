@@ -10,6 +10,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'haml-rails'
 
+gem 'active_model_serializers'
 gem 'bootstrap-sass'
 gem 'bootstrap-sass-extras'
 gem 'devise'

@@ -6,9 +6,10 @@ describe Api::V1::UsersController, type: :controller do
   describe 'POST create' do
     let(:user_params) do
       {
-        fist_name:    'Test',
+        first_name:    'Test',
         last_name:    'User',
-        facebook_uid: '123456'
+        facebook_uid: '123456',
+        email:        'test@user.com'
       }
     end
 
@@ -17,8 +18,6 @@ describe Api::V1::UsersController, type: :controller do
     end
 
     context 'valid params' do
-      before { allow_any_instance_of(User).to receive(:valid?) { true } }
-
       context '' do
         before { action }
         it { expect(response).to have_http_status(:ok) }

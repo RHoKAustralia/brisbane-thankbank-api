@@ -1,8 +1,9 @@
 class Coupon < ActiveRecord::Base
-  belongs_to :coupon_category
+  belongs_to :partner
   belongs_to :user
 
-  validates :coupon_category_id, :user_id, presence: true
+
+  validates :partner_id, :user_id, presence: true
   validates :token, uniqueness: true, presence: true
 
   before_validation :generate_unique_token

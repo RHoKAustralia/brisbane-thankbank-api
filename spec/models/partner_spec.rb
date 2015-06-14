@@ -7,6 +7,6 @@ RSpec.describe Partner, type: :model do
   end
 
   context 'Associations' do
-    it { is_expected.to have_many(:coupon_categories) }
+    it { is_expected.to have_many(:coupons) }
   end
 end

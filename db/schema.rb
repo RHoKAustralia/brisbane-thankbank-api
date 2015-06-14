@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150614021356) do
+ActiveRecord::Schema.define(version: 20150614024552) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,21 @@ ActiveRecord::Schema.define(version: 20150614021356) do
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
 
+  create_table "checkins", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "coupon_id"
+    t.boolean  "approved",           default: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  add_index "checkins", ["coupon_id"], name: "index_checkins_on_coupon_id", using: :btree
+  add_index "checkins", ["user_id"], name: "index_checkins_on_user_id", using: :btree
+
   create_table "coupon_categories", force: :cascade do |t|
     t.datetime "valid_from"
     t.datetime "valid_to"
@@ -57,6 +72,7 @@ ActiveRecord::Schema.define(version: 20150614021356) do
     t.integer  "user_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.integer  "partner_id"
   end
 
   add_index "coupons", ["coupon_category_id"], name: "index_coupons_on_coupon_category_id", using: :btree
@@ -97,6 +113,8 @@ ActiveRecord::Schema.define(version: 20150614021356) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "checkins", "coupons"
+  add_foreign_key "checkins", "users"
   add_foreign_key "coupons", "coupon_categories"
   add_foreign_key "coupons", "users"
 end
